@@ -1,8 +1,26 @@
 #! /bin/bash
-diretorio_backup="/home/vboxuser/file-backup"
 
-nome_arquivo="backup_$(date +%Y%m%d_%H%M%S).tar.gz"
+echo "==========================="
+echo " II  Linux Backup Tool  II "
+echo "==========================="
 
-tar -czf "$nome_arquivo" "$diretorio_backup"
+read -p "Digite o diretório para backup: " diretorio_backup
 
-echo "Backup concluido em $nome_arquivo"
+if [ ! -d "$diretorio_backup" ]; then
+	echo "Diretório não existe!"
+	exit 1
+fi
+
+mkdir -p backups
+
+data=$(date +"%Y%m%d_%H%M%S")
+
+nome_arquivo="backup_$data.tar.gz"
+
+tar -czf "backups/$nome_arquivo" "$diretorio_backup"
+
+echo "Backup criado com sucesso"
+
+du -h "backups/$nome_arquivo"
+
+echo "Backup realizado em $(date)" >> backup.log

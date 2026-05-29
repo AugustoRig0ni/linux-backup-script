@@ -1,35 +1,68 @@
 # Linux Backup Script
 
-Script simples em Bash para automatizar backups de diretórios utilizando compactação `.tar.gz`.
+Script simples de backup desenvolvido em Bash para praticar Linux e automação 🐧
 
 ## Funcionalidades
 
-- Backup automatizado
-- Nome do arquivo com data e hora
-- Compactação utilizando `tar`
+* Backup de diretórios
+* Compactação `.tar.gz`
+* Nome automático com data e hora
+* Verificação se o diretório existe
+* Criação automática da pasta `backups`
+* Log simples de backups
 
-## Como executar
+---
 
-```
-bash
+# Como executar
+
+Dar permissão:
+
+```bash id="m7q2vx"
 chmod +x backup.sh
+```
+
+Executar:
+
+```bash id="p4v8tn"
 ./backup.sh
 ```
 
-## Exemplo de saída
+---
 
+# Estrutura
+
+```bash id="x1m7qp"
+linux-backup-script/
+├── backup.sh
+├── backup.log
+├── backups/
+└── README.md
 ```
-bash
-backup_20260523_230501.tar.gz
-```
 
-## Tecnologias
+---
 
-- Bash
-- Linux
-- tar
+# Tecnologias
 
-## Autor
+* Bash
+* Linux
+* Tar
+
+---
+
+# Objetivo
+
+Projeto criado para praticar:
+
+* Shell Script
+* Linux
+* Automação
+* SysAdmin
+* DevOps
+
+---
+
+# Autor
 
 Augusto Rigoni
+
 
