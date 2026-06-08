@@ -1,26 +1,49 @@
-#! /bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
+
 
 echo "==========================="
 echo " II  Linux Backup Tool  II "
 echo "==========================="
 
-read -p "Digite o diretório para backup: " diretorio_backup
+check_args() {
+if [ $# -eq 0 ]; then
+	echo "Uso: ./backup.sh"
+exit 1
+fi
+}
 
-if [ ! -d "$diretorio_backup" ]; then
-	echo "Diretório não existe!"
+check_dir() {
+
+if 
+	[ ! -d "$DIRETORIO" ]; then 
+	echo "Diretório não existe: $DIRETORIO"
 	exit 1
 fi
+}
 
-mkdir -p backups
 
-data=$(date +"%Y%m%d_%H%M%S")
+create_backup() {
 
-nome_arquivo="backup_$data.tar.gz"
+	mkdir -p backups
+	data=$(date +"%Y%m%d_%H%M%S")
+	nome_arquivo="backup_$data.tar.gz"
+	tar -czf "backups/$nome_arquivo" "$DIRETORIO"
+	echo "Backup criado com sucesso"
+}
 
-tar -czf "backups/$nome_arquivo" "$diretorio_backup"
+show_result(){
 
-echo "Backup criado com sucesso"
+	du -h "backups/$nome_arquivo"
+	echo "Backup realizado em $(date)" >> backup.log
+}
 
-du -h "backups/$nome_arquivo"
-
-echo "Backup realizado em $(date)" >> backup.log
+main() {
+	check_args "$@" 
+	DIRETORIO="$1"
+	check_dir
+	create_backup
+	show_result
+}
+main "$@"
