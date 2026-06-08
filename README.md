@@ -15,6 +15,20 @@ chmod +x .backup.sh
 ```
 # Requisitos
 
-- testado no (Ubunto | Debia)
+- Testado no (Ubuntu | Debia)
 - Bash 4.0 +
 - Comandos: `tar`,`du`,`mkdir`,`date`. 
+
+## Agendamento automático (opcional)
+
+Para rodar o backup automaticamente todo dia às 02:00:
+
+```bash
+crontab -e
+```
+
+Adicione a linha:
+
+```
+0 2 * * * /caminho/para/backup.sh /diretório/para/backup
+```
